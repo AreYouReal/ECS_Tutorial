@@ -10,9 +10,11 @@ namespace ECSTut {
         {
             float DeltaTime = SystemAPI.Time.DeltaTime;
 
-            Entities.WithAll<Tank>().ForEach((TransformAspect InTransformAspect) =>
+            Entities.WithAll<Tank>().ForEach((Entity InEntity, TransformAspect InTransformAspect) =>
             {
                 float3 Position = InTransformAspect.Position;
+
+                Position.y = InEntity.Index;
                 float Angle = (0.5f + noise.cnoise(Position / 10f)) * 4.0f * math.PI;
                 
                 float3 Direction = float3.zero;
